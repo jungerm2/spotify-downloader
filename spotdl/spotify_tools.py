@@ -107,6 +107,19 @@ def write_user_playlist(username, text_file=None):
     playlist = internals.input_link(links)
     return write_playlist(playlist, text_file)
 
+@must_be_authorized
+def write_all_user_playlist(username, text_file=None):
+    """ Write all of a users playlists songs to text_file """
+    links = get_playlists(username=username)
+    if not text_file:
+        text_file = u"{0}.txt".format(slugify(username, ok="-_()[]{}"))
+    all_tracks = set()
+    for playlist in links:
+        new_tracks = write_playlist(playlist, text_file)
+        all_tracks.update(new_tracks)
+    with open(text_file, 'w') as file_out:
+        file_out.write('\n'.join(all_tracks))
+    return all_tracks
 
 @must_be_authorized
 def get_playlists(username):

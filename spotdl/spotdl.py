@@ -54,6 +54,10 @@ def match_args():
         spotify_tools.write_user_playlist(
             username=const.args.username, text_file=const.args.write_to
         )
+    elif const.args.all_username:
+        spotify_tools.write_all_user_playlist(
+            username=const.args.all_username, text_file=const.args.write_to
+        )
 
 
 def main():

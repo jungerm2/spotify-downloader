@@ -126,6 +126,11 @@ def get_arguments(raw_args=None, to_group=True, to_merge=True):
             "--username",
             help="load tracks from user's playlist into <playlist_name>.txt",
         )
+        group.add_argument(
+            "-au",
+            "--all-username",
+            help="load tracks from all of a user's playlist into <username>.txt",
+        )
 
     parser.add_argument(
         "--write-m3u",
@@ -324,7 +329,7 @@ def get_arguments(raw_args=None, to_group=True, to_merge=True):
         parsed.playlist or parsed.album or parsed.all_albums or parsed.username
     ):
         parser.error(
-            "--write-to can only be used with --playlist, --album, --all-albums, or --username"
+            "--write-to can only be used with --playlist, --album, --all-albums, --username or --all-username"
         )
 
     parsed.log_level = log_leveller(parsed.log_level)
